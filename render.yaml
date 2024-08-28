@@ -11,9 +11,7 @@ services:
         fromDatabase:
           name: db.sqlite3
           property: connectionString
-      - key: 123456
-        sync: false
+      - key: SECRET_KEY
         value: your-secret-key
       - key: ALLOWED_HOSTS
-        sync: false
         value: "*"
