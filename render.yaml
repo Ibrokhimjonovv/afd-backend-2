@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --no-input"
-    startCommand: "gunicorn afd-backend.wsgi"
+    startCommand: "gunicorn config.wsgi"
     autoDeploy: true
     envVars:
       - key: DATABASE_URL
