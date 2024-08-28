@@ -1,1 +1,1 @@
-web: gunicorn afd-backend.wsgi
+web: gunicorn config.wsgi
