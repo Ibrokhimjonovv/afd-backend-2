@@ -16,4 +16,4 @@ services:
         value: your-secret-key
       - key: ALLOWED_HOSTS
         sync: false
-        value: afd-platform.com
+        value: *
