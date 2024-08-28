@@ -8,9 +8,7 @@ services:
     autoDeploy: true
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: db.sqlite3
-          property: connectionString
+        value: "sqlite:///db.sqlite3"
       - key: SECRET_KEY
         value: your-secret-key
       - key: ALLOWED_HOSTS
