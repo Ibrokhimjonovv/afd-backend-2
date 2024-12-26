@@ -34,3 +34,4 @@ class MovieSeries(models.Model):
     
 class SwiperFilms(models.Model):
     image = models.FileField(null=True, blank=True)
+    image_url = models.CharField(max_length=1024)

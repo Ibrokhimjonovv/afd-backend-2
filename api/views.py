@@ -52,27 +52,7 @@ class AddSwiperFilmsSet(ModelViewSet):
     serializer_class = AddSwiperFilmsSerializer
     queryset = SwiperFilms.objects
 
-
-# from rest_framework.decorators import action
-# from rest_framework.permissions import IsAuthenticated
-# from rest_framework import viewsets
-
-# class ProfileViewSet(ModelViewSet):
-#     serializer_class = UserModelSerializer
-#     permission_classes = [IsAuthenticated]
-
-#     def get_queryset(self):
-#         user = self.request.user
-#         print(User.objects.filter(user=user))
-#         return User.objects.filter(user=user)
-
-#     @action(detail=False, methods=['get'])
-#     def current(self, request):
-#         user = request.user
-#         profile = User.objects.get(user=user)
-#         serializer = self.get_serializer(profile)
-#         return Response(serializer.data)
-from rest_framework.decorators import api_view, authentication_classes
+from rest_framework.decorators import api_view, permission_classes
 
 @api_view(["GET"])
 def get_profile(request):
@@ -81,9 +61,30 @@ def get_profile(request):
     
     serializer = UserModelSerializer(request.user)
     return Response(serializer.data)
-# @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
-# def get_profile(request):
-#     user = request.user
-#     serializer = UserModelSerializer(user)
-#     return Response(serializer.data)
+
+from rest_framework.permissions import IsAuthenticated
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def edit_profile(request):
+    try:
+        user = request.user
+        serializer = UserModelSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+
+from add_all.models import *
+
+@api_view(['GET'])
+def search_films(request):
+    query = request.GET.get('query', '')
+    if query:
+        films = Add_movies.objects.filter(movies_name__icontains=query)
+        serializer = AddMoviesSerializer(films, many=True)
+        return Response(serializer.data)
+    return Response([])

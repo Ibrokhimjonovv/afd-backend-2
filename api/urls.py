@@ -9,11 +9,12 @@ router.register("departments", DepartmentsViewSet)
 router.register("movies", AddMoviesViewSet)
 router.register("swiper-films", AddSwiperFilmsSet)
 router.register('series', MovieSeriesViewSet, basename='series')
-# router.register('profiles', ProfileViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
     path("get_profile/", get_profile),
+    path('edit_profile/', edit_profile, name='edit_profile'),
+    path('movies/search/', search_films, name='search_films'),
     path('login/', LoginView.as_view(), name='login'),
     path('signup/', SignupView.as_view(), name='signup'),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

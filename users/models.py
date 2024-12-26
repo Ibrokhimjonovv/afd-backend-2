@@ -9,6 +9,7 @@ class User(AbstractUser):
     username = models.CharField(max_length=20, unique=True)
     email = models.CharField(max_length=512)
     password = models.CharField(max_length=32)
+    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
 
     def __str__(self):
         return self.username
