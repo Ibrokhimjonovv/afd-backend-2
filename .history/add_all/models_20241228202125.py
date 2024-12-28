@@ -19,8 +19,7 @@ class Add_movies(models.Model):
     movies_url = models.CharField(max_length=10000000, null=True, blank=True)
     movies_local = models.FileField(null=True, blank=True)
     country = models.CharField(max_length=32)
-    count = models.PositiveIntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
+    count = models.Posi
 
     def __str__(self):
         return self.movies_name

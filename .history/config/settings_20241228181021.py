@@ -80,10 +80,6 @@ REST_FRAMEWORK = {
     )
 }
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',  # Agar 127.0.0.1 dan foydalanayotgan bo'lsangiz
-]
 
 
 ROOT_URLCONF = 'config.urls'

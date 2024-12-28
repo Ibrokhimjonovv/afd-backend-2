@@ -7,6 +7,7 @@ router = DefaultRouter()
 router.register('users', UserViewSet)
 router.register("departments", DepartmentsViewSet)
 router.register("movies", AddMoviesViewSet)
+router.register("swiper-films", AddSwiperFilmsSet)
 router.register('series', MovieSeriesViewSet, basename='series')
 
 urlpatterns = [
@@ -18,5 +19,5 @@ urlpatterns = [
     path('signup/', SignupView.as_view(), name='signup'),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('movies/<int:id>/increment/', increment_count, name='increment_count'),
+    path('movies/<int:id>/increment/', views.increment_count, name='increment_count'),
 ]

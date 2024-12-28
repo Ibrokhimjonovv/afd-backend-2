@@ -20,7 +20,6 @@ class Add_movies(models.Model):
     movies_local = models.FileField(null=True, blank=True)
     country = models.CharField(max_length=32)
     count = models.PositiveIntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.movies_name
@@ -34,3 +33,6 @@ class MovieSeries(models.Model):
     def __str__(self):
         return f"{self.movie.movies_name} - {self.title}"
     
+class SwiperFilms(models.Model):
+    image = models.FileField(null=True, blank=True)
+    image_url = models.CharField(max_length=1025)

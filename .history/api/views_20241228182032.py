@@ -10,7 +10,7 @@ from add_all.models import *
 from add_all.models import *
 from users.models import User
 from django.shortcuts import get_object_or_404
-from django.http import JsonResponse# Create your views here.
+# Create your views here.
 
 class LoginView(APIView):
     authentication_classes = [BasicAuthentication]
@@ -45,9 +45,6 @@ class AddMoviesViewSet(ModelViewSet):
     queryset = Add_movies.objects
 
 # Count
-from django.views.decorators.csrf import csrf_exempt
-
-@csrf_exempt
 def increment_count(request, id):
     if request.method == 'POST':
         movie = get_object_or_404(Add_movies, id=id)
@@ -59,6 +56,12 @@ def increment_count(request, id):
 class MovieSeriesViewSet(ModelViewSet):
     queryset = MovieSeries.objects.all()
     serializer_class = MovieSeriesSerializer
+
+
+class AddSwiperFilmsSet(ModelViewSet):
+    authentication_classes = [BasicAuthentication]
+    serializer_class = AddSwiperFilmsSerializer
+    queryset = SwiperFilms.objects
 
 from rest_framework.decorators import api_view, permission_classes
 

@@ -60,6 +60,12 @@ class MovieSeriesViewSet(ModelViewSet):
     queryset = MovieSeries.objects.all()
     serializer_class = MovieSeriesSerializer
 
+
+class AddSwiperFilmsSet(ModelViewSet):
+    authentication_classes = [BasicAuthentication]
+    serializer_class = AddSwiperFilmsSerializer
+    queryset = SwiperFilms.objects
+
 from rest_framework.decorators import api_view, permission_classes
 
 @api_view(["GET"])

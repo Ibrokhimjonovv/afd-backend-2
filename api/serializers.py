@@ -61,8 +61,6 @@ class UserModelSerializer(serializers.ModelSerializer):
         model = User
         fields = "__all__"
 
-    
-
 class DepartmentsSerializer(ModelSerializer):
     class Meta:
         model = Add_departments
@@ -81,11 +79,3 @@ class AddMoviesSerializer(ModelSerializer):
     class Meta:
         model = Add_movies
         fields = "__all__"
-
-class AddSwiperFilmsSerializer(ModelSerializer):
-    class Meta:
-        model = SwiperFilms
-        fields = "__all__"
-
-
-        

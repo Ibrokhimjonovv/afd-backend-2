@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=m@=j3_mt@dp!#s5l-rc^lre%-5br!a#^waq%c&2qzfgz7iwy3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Serverga qo'yishdan oldin allowed hostga server domeni yoki IP sini joylash kk
 ALLOWED_HOSTS = ["*"]
@@ -80,10 +80,6 @@ REST_FRAMEWORK = {
     )
 }
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',  # Agar 127.0.0.1 dan foydalanayotgan bo'lsangiz
-]
 
 
 ROOT_URLCONF = 'config.urls'
