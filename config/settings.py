@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=m@=j3_mt@dp!#s5l-rc^lre%-5br!a#^waq%c&2qzfgz7iwy3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Serverga qo'yishdan oldin allowed hostga server domeni yoki IP sini joylash kk
 ALLOWED_HOSTS = ["*"]
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    "api", 
+    "api",
     "users",
     'corsheaders',
     "add_all",
@@ -70,15 +70,14 @@ AUTHENTICATION_BACKENDS = (
 )
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    ]
-}
-REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
+    'DEFAULT_RENDERED_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
 }
 
 
