@@ -97,15 +97,8 @@ def search_films(request):
         return Response(serializer.data)
     return Response([])
 
-from rest_framework import permissions
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status, permissions
-from add_all.models import SavedFilm, Add_movies
-from .serializers import SavedFilmSerializer
-
 class SavedFilmsView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         saved_films = SavedFilm.objects.filter(user=request.user)
@@ -114,6 +107,7 @@ class SavedFilmsView(APIView):
 
     def post(self, request):
         film_id = request.data.get('filmId')
+
         if not film_id:
             return Response({"detail": "Film ID is required."}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -128,11 +122,3 @@ class SavedFilmsView(APIView):
         serializer = SavedFilmSerializer(saved_films, many=True)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def delete(self, request, film_id):
-        try:
-            saved_film = SavedFilm.objects.get(user=request.user, film__id=film_id)
-            saved_film.delete()
-            return Response({"detail": "Film successfully removed."}, status=status.HTTP_204_NO_CONTENT)
-        except SavedFilm.DoesNotExist:
-            return Response({"detail": "Film not found."}, status=status.HTTP_404_NOT_FOUND)

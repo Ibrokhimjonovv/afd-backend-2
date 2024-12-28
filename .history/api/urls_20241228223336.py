@@ -7,6 +7,7 @@ router = DefaultRouter()
 router.register('users', UserViewSet)
 router.register("departments", DepartmentsViewSet)
 router.register("movies", AddMoviesViewSet)
+router.register("saved", SavedFilmsView)
 router.register('series', MovieSeriesViewSet, basename='series')
 
 urlpatterns = [
@@ -19,6 +20,5 @@ urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('movies/<int:id>/increment/', increment_count, name='increment_count'),
-    path('saved-films/', SavedFilmsView.as_view(), name='saved-films-list'),  # GET va POST
-    path('saved-films/<int:film_id>/', SavedFilmsView.as_view(), name='saved-films-delete'),  # DELETE uchun
+    # path('movies/saved/', SavedFilmsView.as_view(), name='saved-films'),  # Saqlangan filmlar uchun API
 ]

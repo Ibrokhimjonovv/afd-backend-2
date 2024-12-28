@@ -79,3 +79,11 @@ class AddMoviesSerializer(ModelSerializer):
     class Meta:
         model = Add_movies
         fields = "__all__"
+
+# Saqlangan film uchun serializer
+class SavedFilmSerializer(serializers.ModelSerializer):
+    film = AddMoviesSerializer()  # Saqlangan filmga oid ma'lumotlarni kiritish
+
+    class Meta:
+        model = SavedFilm
+        fields = "__all__"

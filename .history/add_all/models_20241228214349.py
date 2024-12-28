@@ -38,7 +38,7 @@ class MovieSeries(models.Model):
 # Saqlangan film modeli
 class SavedFilm(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Foydalanuvchi
-    film = models.ForeignKey(Add_movies, on_delete=models.CASCADE)  # Saqlangan film
+    film = models.ForeignKey(Add, on_delete=models.CASCADE)  # Saqlangan film
     saved_at = models.DateTimeField(auto_now_add=True)  # Qachon saqlanganini ko'rsatish
 
     def __str__(self):

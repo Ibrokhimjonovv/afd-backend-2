@@ -130,6 +130,7 @@ class SavedFilmsView(APIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def delete(self, request, film_id):
+
         try:
             saved_film = SavedFilm.objects.get(user=request.user, film__id=film_id)
             saved_film.delete()

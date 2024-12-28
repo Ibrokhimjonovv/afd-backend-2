@@ -97,42 +97,33 @@ def search_films(request):
         return Response(serializer.data)
     return Response([])
 
-from rest_framework import permissions
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status, permissions
-from add_all.models import SavedFilm, Add_movies
-from .serializers import SavedFilmSerializer
-
+# Saqlangan filmlarni olish uchun API
 class SavedFilmsView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]  # Foydalanuvchi tizimga kirgan bo'lishi kerak
 
+    # Saqlangan filmlar ro'yxatini olish
     def get(self, request):
-        saved_films = SavedFilm.objects.filter(user=request.user)
-        serializer = SavedFilmSerializer(saved_films, many=True)
+        saved_films = SavedFilm.objects.filter(user=request.user)  # Foydalanuvchining saqlagan filmlari
+        serializer = SavedFilmSerializer(saved_films, many=True)  # Serializer orqali JSON formatiga o'tkazish
         return Response(serializer.data)
 
+    # Filmni saqlash
     def post(self, request):
-        film_id = request.data.get('filmId')
+        film_id = request.data.get('filmId')  # POST orqali yuborilgan film ID sini olish
+
         if not film_id:
             return Response({"detail": "Film ID is required."}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            film = Add_movies.objects.get(id=film_id)
-        except Add_movies.DoesNotExist:
+            film = Add.objects.get(id=film_id)  # Filmni topish
+        except Film.DoesNotExist:
             return Response({"detail": "Film not found."}, status=status.HTTP_404_NOT_FOUND)
 
+        # Filmni foydalanuvchi tomonidan saqlash
         saved_film, created = SavedFilm.objects.get_or_create(user=request.user, film=film)
 
+        # Saqlangan filmlar ro'yxatini qaytarish
         saved_films = SavedFilm.objects.filter(user=request.user)
         serializer = SavedFilmSerializer(saved_films, many=True)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def delete(self, request, film_id):
-        try:
-            saved_film = SavedFilm.objects.get(user=request.user, film__id=film_id)
-            saved_film.delete()
-            return Response({"detail": "Film successfully removed."}, status=status.HTTP_204_NO_CONTENT)
-        except SavedFilm.DoesNotExist:
-            return Response({"detail": "Film not found."}, status=status.HTTP_404_NOT_FOUND)
