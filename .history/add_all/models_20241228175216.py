@@ -9,7 +9,7 @@ class Add_departments(models.Model):
 
     def __str__(self):
         return self.department_name
-
+    
 class Add_movies(models.Model):
     add_departments = models.ForeignKey(Add_departments, on_delete=models.CASCADE, related_name="add_departments")
     movies_preview = models.FileField(null=True, blank=True, upload_to="movies_images")

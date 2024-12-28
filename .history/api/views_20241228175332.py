@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from .serializers import *
