@@ -1,12 +1,6 @@
-<<<<<<< Updated upstream
 __pycache__/
 env/
 migrations/
 db.sqlite3
-=======
-__pycache__/
-env/
-migrations/
-db.sqlite3/
->>>>>>> Stashed changes
 assets/*
+
