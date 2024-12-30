@@ -21,8 +21,7 @@ class Add_movies(models.Model):
     movies_local = models.FileField(null=True, blank=True)
     country = models.CharField(max_length=32)
     count = models.PositiveIntegerField(default=0)
-    year = models.CharField(max_length=32, default="")
-    genre = models.CharField(max_length=512, default="")
+    year = models.CharField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
