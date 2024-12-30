@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-=m@=j3_mt@dp!#s5l-rc^lre%-5br!a#^waq%c&2qzfgz7iwy3
 DEBUG = False
 
 # Serverga qo'yishdan oldin allowed hostga server domeni yoki IP sini joylash kk
-ALLOWED_HOSTS = ['https://afd-platform.vercel.app/', 'http://localhost:3000/', 'www.pythonanywhere.com']
+ALLOWED_HOSTS = ['https://afd-platform.vercel.app/', 'http://localhost:3000/', 'pythonanywhere.com']
 
 SECURE_SSL_REDIRECT = True
 
