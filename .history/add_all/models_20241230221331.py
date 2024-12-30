@@ -23,7 +23,7 @@ class Add_movies(models.Model):
     count = models.PositiveIntegerField(default=0)
     year = models.CharField(max_length=32, default="")
     genre = models.CharField(max_length=512, default="")
-    all_series = models.CharField(max_length=512, default="")
+    all_series = models.CharField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

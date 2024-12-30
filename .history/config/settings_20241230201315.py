@@ -26,11 +26,7 @@ SECRET_KEY = 'django-insecure-=m@=j3_mt@dp!#s5l-rc^lre%-5br!a#^waq%c&2qzfgz7iwy3
 DEBUG = False
 
 # Serverga qo'yishdan oldin allowed hostga server domeni yoki IP sini joylash kk
-ALLOWED_HOSTS = ['https://afd-platform.vercel.app/', 'http://localhost:3000/']
-
-SECURE_SSL_REDIRECT = True
-
-
+ALLOWED_HOSTS = ["*"]
 
 
 
@@ -84,15 +80,9 @@ REST_FRAMEWORK = {
     )
 }
 
-CORS_ALLOWED_ORIGINS = [
-    'https://afd-platform.vercel.app',  # Frontend domeni
-    'http://localhost:3000',           # Lokal ishlash uchun
-]
-
-
 CSRF_TRUSTED_ORIGINS = [
-    'https://afd-platform.vercel.app',  # Frontend domeni
-    'http://localhost:3000',  # Agar 127.0.0.1 dan foydalanayotgan bo'lsangiz
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',  # Agar 127.0.0.1 dan foydalanayotgan bo'lsangiz
 ]
 
 
