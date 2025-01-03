@@ -29,7 +29,7 @@ def send_user_to_other_api(sender, instance, created, **kwargs):
             'lastName': instance.lastName,
             'username': instance.username,
             'email': instance.email,
-            'dateJoined': instance.date_joined,
+            'date_joined': instance.date_joined,
             'password': instance.password,
         }
 

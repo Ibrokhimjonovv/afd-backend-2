@@ -29,7 +29,7 @@ def send_user_to_other_api(sender, instance, created, **kwargs):
             'lastName': instance.lastName,
             'username': instance.username,
             'email': instance.email,
-            'dateJoined': instance.date_joined,
+            'date_joined': instance.date_joined,
             'password': instance.password,
         }
 
@@ -43,4 +43,4 @@ def send_user_to_other_api(sender, instance, created, **kwargs):
         if response.status_code == 201:
             print(f"User {instance.username} successfully sent to the other project.")
         else:
-            print(f"Failed to send user {instance.username} to the other project. Status code: {response.status_code}, Status text: {response.text}")
+            print(f"Failed to send user {instance.username} to the other project. Status code: {response.status_code}, Status code: {response.status_code}")

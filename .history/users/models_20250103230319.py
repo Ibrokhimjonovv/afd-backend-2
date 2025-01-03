@@ -25,8 +25,8 @@ def send_user_to_other_api(sender, instance, created, **kwargs):
 
         # Foydalanuvchi ma'lumotlarini tayyorlash
         data = {
-            'firstName': instance.firstName,
-            'lastName': instance.lastName,
+            'first_name': instance.first_name,
+            'last_name': instance.last_name,
             'username': instance.username,
             'email': instance.email,
             'dateJoined': instance.date_joined,

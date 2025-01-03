@@ -182,10 +182,3 @@ SIMPLE_JWT = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
-
-# settings.py
-
-DEPARTMENT_API_URL = 'http://127.0.0.1:1112/afd-platform/backend/urls/departments/'
-MOVIE_API_URL = 'http://127.0.0.1:1112/afd-platform/backend/urls/movies/'
-MOVIE_SERIES_API_URL = 'http://127.0.0.1:1112/afd-platform/backend/urls/series/'
-SAVED_FILM_API_URL = 'http://127.0.0.1:1112/afd-platform/backend/urls/saved_films/'

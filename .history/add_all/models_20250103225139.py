@@ -105,7 +105,7 @@ def send_movie_series_to_other_api(sender, instance, created, **kwargs):
             'movie_name': instance.movie.movies_name,
             'title': instance.title,
             'video_url': instance.video_url,
-            'movie': instance.movie.id,  # Departmentni to'g'ri yuboring
+            'add_departments': instance.add_departments.id,  # Departmentni to'g'ri yuboring
         }
 
         # Agar video faylini yuborish kerak bo'lsa:

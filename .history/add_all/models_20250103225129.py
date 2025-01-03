@@ -105,7 +105,7 @@ def send_movie_series_to_other_api(sender, instance, created, **kwargs):
             'movie_name': instance.movie.movies_name,
             'title': instance.title,
             'video_url': instance.video_url,
-            'movie': instance.movie.id,  # Departmentni to'g'ri yuboring
+            'add_departments': instance.add_departments.id,  # Departmentni to'g'ri yuboring
         }
 
         # Agar video faylini yuborish kerak bo'lsa:
@@ -118,8 +118,7 @@ def send_movie_series_to_other_api(sender, instance, created, **kwargs):
         if response.status_code == 201:
             print("Movie Series successfully sent to the other project")
         else:
-            print(f"Failed to send movie to the other project. Status code: {response.status_code}, Response: {response.text}")
-
+            print("Failed to send movie series to the other project")
 
 # Saqlangan film modeli
 class SavedFilm(models.Model):

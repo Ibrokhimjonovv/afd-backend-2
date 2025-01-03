@@ -68,25 +68,22 @@ def send_movie_to_other_api(sender, instance, created, **kwargs):
             'count': instance.count,
             'movies_url': instance.movies_url,
             'movies_preview_url': instance.movies_preview_url,
-            'add_departments': instance.add_departments.id,  # Departmentni to'g'ri yuboring
+            'department_name': instance.add_departments.department_name,  # Bog'langan departament nomini yuborish
         }
+
+
+        # Agar rasm faylini yuborish kerak bo'lsa:
         print(data)
-
-        files = {}
-
-        if instance.movies_local:
-            files['movie_local'] = instance.movies_local
-
         if instance.movies_preview:
-            files['movies_preview'] = instance.movies_preview
-
-        response = requests.post(url, data=data, files=files)
-
+            files = {'movies_preview': instance.movies_preview}
+            response = requests.post(url, data=data, files=files)
+        else:
+            response = requests.post(url, data=data)
 
         if response.status_code == 201:
             print("Movie successfully sent to the other project")
         else:
-            print(f"Failed to send movie to the other project. Status code: {response.status_code}, Response: {response.text}")
+            print("Failed to send movie to the other project")
 
 class MovieSeries(models.Model):
     movie = models.ForeignKey(Add_movies, on_delete=models.CASCADE, related_name='series')
@@ -105,7 +102,6 @@ def send_movie_series_to_other_api(sender, instance, created, **kwargs):
             'movie_name': instance.movie.movies_name,
             'title': instance.title,
             'video_url': instance.video_url,
-            'movie': instance.movie.id,  # Departmentni to'g'ri yuboring
         }
 
         # Agar video faylini yuborish kerak bo'lsa:
@@ -118,8 +114,7 @@ def send_movie_series_to_other_api(sender, instance, created, **kwargs):
         if response.status_code == 201:
             print("Movie Series successfully sent to the other project")
         else:
-            print(f"Failed to send movie to the other project. Status code: {response.status_code}, Response: {response.text}")
-
+            print("Failed to send movie series to the other project")
 
 # Saqlangan film modeli
 class SavedFilm(models.Model):
