@@ -25,7 +25,7 @@ class SignupView(APIView):
     def post(self, request):
         serializer = SignupSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()  # Yangi foydalanuvchini yaratish
+            serializer.save()
             return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -136,3 +136,13 @@ class SavedFilmsView(APIView):
             return Response({"detail": "Film successfully removed."}, status=status.HTTP_204_NO_CONTENT)
         except SavedFilm.DoesNotExist:
             return Response({"detail": "Film not found."}, status=status.HTTP_404_NOT_FOUND)
+        
+from rest_framework import viewsets, permissions
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all().order_by('-created_at')
+    serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

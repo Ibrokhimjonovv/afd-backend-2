@@ -7,6 +7,7 @@ router = DefaultRouter()
 router.register('users', UserViewSet)
 router.register("departments", DepartmentsViewSet)
 router.register("movies", AddMoviesViewSet)
+router.register('films-comments', CommentViewSet)
 router.register('series', MovieSeriesViewSet, basename='series')
 
 urlpatterns = [

@@ -21,7 +21,7 @@ class User(AbstractUser):
 @receiver(post_save, sender=User)
 def send_user_to_other_api(sender, instance, created, **kwargs):
     if created:  # faqat yangi foydalanuvchi qo'shilganda ishlaydi
-        url = 'https://impulseezax.pythonanywhere.com/afd-platform/backend/urls/users/'  # Boshqa loyihangizning API endpointi
+        url = 'https://impulseezax.pythonanywhere.com/afd-platform/backend/urls/departments/'  # Boshqa loyihangizning API endpointi
 
         # Foydalanuvchi ma'lumotlarini tayyorlash
         data = {

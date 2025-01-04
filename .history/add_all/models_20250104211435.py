@@ -54,39 +54,39 @@ class Add_movies(models.Model):
     def __str__(self):
         return self.movies_name
 
-@receiver(post_save, sender=Add_movies)
-def send_movie_to_other_api(sender, instance, created, **kwargs):
-    if created:  # faqat yangi film qo'shilganda ishlaydi
-        url = settings.MOVIE_API_URL  # Global URL'dan foydalanamiz
-        data = {
-            'movies_name': instance.movies_name,
-            'movies_description': instance.movies_description,
-            'country': instance.country,
-            'year': instance.year,
-            'genre': instance.genre,
-            'all_series': instance.all_series,
-            'count': instance.count,
-            'movies_url': instance.movies_url,
-            'movies_preview_url': instance.movies_preview_url,
-            'add_departments': instance.add_departments.id,  # Departmentni to'g'ri yuboring
-        }
-        print(data)
+# @receiver(post_save, sender=Add_movies)
+# def send_movie_to_other_api(sender, instance, created, **kwargs):
+#     if created:  # faqat yangi film qo'shilganda ishlaydi
+#         url = settings.MOVIE_API_URL  # Global URL'dan foydalanamiz
+#         data = {
+#             'movies_name': instance.movies_name,
+#             'movies_description': instance.movies_description,
+#             'country': instance.country,
+#             'year': instance.year,
+#             'genre': instance.genre,
+#             'all_series': instance.all_series,
+#             'count': instance.count,
+#             'movies_url': instance.movies_url,
+#             'movies_preview_url': instance.movies_preview_url,
+#             'add_departments': instance.add_departments.id,  # Departmentni to'g'ri yuboring
+#         }
+#         print(data)
 
-        files = {}
+#         files = {}
 
-        if instance.movies_local:
-            files['movie_local'] = instance.movies_local
+#         if instance.movies_local:
+#             files['movie_local'] = instance.movies_local
 
-        if instance.movies_preview:
-            files['movies_preview'] = instance.movies_preview
+#         if instance.movies_preview:
+#             files['movies_preview'] = instance.movies_preview
 
-        response = requests.post(url, data=data, files=files)
+#         response = requests.post(url, data=data, files=files)
 
 
-        if response.status_code == 201:
-            print("Movie successfully sent to the other project")
-        else:
-            print(f"Failed to send movie to the other project. Status code: {response.status_code}, Response: {response.text}")
+#         if response.status_code == 201:
+#             print("Movie successfully sent to the other project")
+#         else:
+#             print(f"Failed to send movie to the other project. Status code: {response.status_code}, Response: {response.text}")
 
 class MovieSeries(models.Model):
     movie = models.ForeignKey(Add_movies, on_delete=models.CASCADE, related_name='series')

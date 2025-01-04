@@ -87,3 +87,10 @@ class SavedFilmSerializer(serializers.ModelSerializer):
     class Meta:
         model = SavedFilm
         fields = "__all__"
+
+class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(read_only=True)  # Foydalanuvchi ismini ko'rsatish
+
+    class Meta:
+        model = Comment
+        fields = "__all__"
