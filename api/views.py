@@ -146,3 +146,35 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class VoteMovie(APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def post(self, request, movie_id):
+        movie = Add_movies.objects.get(id=movie_id)
+        vote = request.data.get('vote')  # like (True) or dislike (False)
+
+        existing_vote = LikeDislike.objects.filter(user=request.user, movie=movie).first()
+        if existing_vote:
+            # Agar foydalanuvchi allaqachon ovoz bergan bo'lsa, uning ovozini yangilaydi
+            existing_vote.vote = vote
+            existing_vote.save()
+            return Response({"message": "Vote updated successfully"})
+        
+        # Yangi ovoz berish
+        LikeDislike.objects.create(user=request.user, movie=movie, vote=vote)
+        return Response({"message": "Vote successfully recorded"})
+
+class GetVotes(APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get(self, request, movie_id):
+        movie = Add_movies.objects.get(id=movie_id)
+        like_count = LikeDislike.objects.filter(movie=movie, vote=True).count()
+        dislike_count = LikeDislike.objects.filter(movie=movie, vote=False).count()
+        
+        return Response({
+            "like_count": like_count,
+            "dislike_count": dislike_count
+        })

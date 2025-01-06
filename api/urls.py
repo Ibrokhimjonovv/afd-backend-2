@@ -22,4 +22,6 @@ urlpatterns = [
     path('movies/<int:id>/increment/', increment_count, name='increment_count'),
     path('saved-films/', SavedFilmsView.as_view(), name='saved-films-list'),  # GET va POST
     path('saved-films/<int:film_id>/', SavedFilmsView.as_view(), name='saved-films-delete'),  # DELETE uchun
+    path('vote/<int:movie_id>/', VoteMovie.as_view(), name='vote_movie'),
+    path('vote-count/<int:movie_id>/', GetVotes.as_view(), name='vote_count'),
 ]
